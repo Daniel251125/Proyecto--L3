@@ -40,14 +40,14 @@ namespace Win.Supermercado
 
             var resultado = _productos.GuardarProducto(producto);
 
-            if (resultado == true)
+            if (resultado.Exitoso == true)
             {
                 listaProductosBindingSource.ResetBindings(false);
                 DesabilitarHabilitarBotones(true);
             }
             else
             {
-                MessageBox.Show("OCURRIO UN ERROR AL MOMENTO DE GUARDAR");
+                MessageBox.Show(resultado.Mensaje);
             }
         }
 
