@@ -55,5 +55,20 @@ namespace Win.Supermercado
             _productos.AgregarProducto();
             listaProductosBindingSource.MoveLast();
         }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            var id = Convert.ToInt32(idTextBox.Text);
+            var resultado = _productos.EliminarProducto(id);
+
+            if (resultado == true)
+            {
+                listaProductosBindingSource.ResetBindings(false);
+            }
+            else
+            {
+                MessageBox.Show("OCURRIO UN ERROR AL QUERER ELIMINAR EL PRODUCTO");
+            }
+        }
     }
 }

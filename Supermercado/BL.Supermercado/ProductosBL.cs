@@ -81,6 +81,19 @@ namespace BL.Supermercado
             var nuevoProducto = new Producto();
             ListaProductos.Add(nuevoProducto);
         }
+
+        public bool EliminarProducto(int id)
+        {
+            foreach (var producto in ListaProductos)
+            {
+                if (producto.Id == id)
+                {
+                    ListaProductos.Remove(producto);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public class Producto
