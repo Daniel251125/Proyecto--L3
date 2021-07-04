@@ -32,5 +32,10 @@ namespace Win.Supermercado
         {
 
         }
+
+        private void listaProductosBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            var producto = (Producto)listaProductosBindingSource.Current;
+        }
     }
 }
