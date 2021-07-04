@@ -268,6 +268,7 @@
             this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.listaProductosBindingSource, "Id", true));
             this.idTextBox.Location = new System.Drawing.Point(129, 39);
             this.idTextBox.Name = "idTextBox";
+            this.idTextBox.ReadOnly = true;
             this.idTextBox.Size = new System.Drawing.Size(262, 20);
             this.idTextBox.TabIndex = 8;
             // 
@@ -287,6 +288,7 @@
             this.toolStripButtonCancelar.Name = "toolStripButtonCancelar";
             this.toolStripButtonCancelar.Size = new System.Drawing.Size(57, 22);
             this.toolStripButtonCancelar.Text = "Cancelar";
+            this.toolStripButtonCancelar.Click += new System.EventHandler(this.toolStripButtonCancelar_Click);
             // 
             // listaProductosBindingSource
             // 

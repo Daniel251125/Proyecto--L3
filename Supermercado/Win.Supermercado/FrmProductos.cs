@@ -43,6 +43,7 @@ namespace Win.Supermercado
             if (resultado == true)
             {
                 listaProductosBindingSource.ResetBindings(false);
+                DesabilitarHabilitarBotones(true);
             }
             else
             {
@@ -54,11 +55,34 @@ namespace Win.Supermercado
         {
             _productos.AgregarProducto();
             listaProductosBindingSource.MoveLast();
+
+            DesabilitarHabilitarBotones(false);
+        }
+
+        private void DesabilitarHabilitarBotones(bool valor)
+        {
+            bindingNavigatorMoveFirstItem.Enabled = valor;
+            bindingNavigatorMoveLastItem.Enabled = valor;
+            bindingNavigatorMovePreviousItem.Enabled = valor;
+            bindingNavigatorMoveNextItem.Enabled = valor;
+
+            bindingNavigatorAddNewItem.Enabled = valor;
+            bindingNavigatorDeleteItem.Enabled = valor;
+            toolStripButtonCancelar.Visible = !valor;
         }
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(idTextBox.Text);
+            if (idTextBox.Text != "")
+            {
+                var id = Convert.ToInt32(idTextBox.Text);
+                Eliminar(id);
+           
+            }
+        }
+
+        private void Eliminar(int id)
+        {
             var resultado = _productos.EliminarProducto(id);
 
             if (resultado == true)
@@ -69,6 +93,12 @@ namespace Win.Supermercado
             {
                 MessageBox.Show("OCURRIO UN ERROR AL QUERER ELIMINAR EL PRODUCTO");
             }
+        }
+
+        private void toolStripButtonCancelar_Click(object sender, EventArgs e)
+        {
+            DesabilitarHabilitarBotones(true);
+            Eliminar(0);
         }
     }
 }
