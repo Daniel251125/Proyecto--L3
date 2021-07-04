@@ -75,6 +75,12 @@ namespace BL.Supermercado
             }
             return true;
         }
+
+        public void AgregarProducto()
+        {
+            var nuevoProducto = new Producto();
+            ListaProductos.Add(nuevoProducto);
+        }
     }
 
     public class Producto
