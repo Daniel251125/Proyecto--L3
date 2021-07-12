@@ -44,6 +44,7 @@ namespace Win.Supermercado
             {
                 listaProductosBindingSource.ResetBindings(false);
                 DesabilitarHabilitarBotones(true);
+                MessageBox.Show("PRODUCTO GUARDADO");
             }
             else
             {
