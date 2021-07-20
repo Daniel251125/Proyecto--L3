@@ -13,13 +13,8 @@ namespace Win.Supermercado
             InitializeComponent();
 
             _seguridad = new SeguridadBL();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
 
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -27,24 +22,29 @@ namespace Win.Supermercado
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string Usuario;
-            string Contraseña;
+            string usuario;
+            string contrasena;
 
-            Usuario = txtUsuario.Text;
-            Contraseña = txtContra.Text;
+            usuario = txtUsuario.Text;
+            contrasena = txtContra.Text;
 
-            var resultado = _seguridad.Autorizar(Usuario, Contraseña);
+            button1.Enabled = false;
+            button1.Text = "VERIFICANDO...";
+            Application.DoEvents();
+
+            var resultado = _seguridad.Autorizar(usuario, contrasena);
 
             if (resultado == true)
             {
                 this.Close();
             }
-
             else
-
             {
                 MessageBox.Show("Usuario o contraseña incorrecta");
             }
+
+            button1.Enabled = true;
+            button1.Text = "ACEPTAR";
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
@@ -55,6 +55,16 @@ namespace Win.Supermercado
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtUsuario_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtContra_Enter(object sender, EventArgs e)
+        {
+            txtContra.UseSystemPasswordChar = true;
         }
     }
 }
