@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,20 @@ namespace BL.Supermercado
             var usuarioAdmin = new Usuario();
             usuarioAdmin.Nombre = "Admin";
             usuarioAdmin.Contrasena = "1234";
+            usuarioAdmin.TipoUsuario = "Administradores";
             context.Usuarios.Add(usuarioAdmin);
 
             var usuarioAdmin2 = new Usuario();
             usuarioAdmin2.Nombre = "Admin";
             usuarioAdmin2.Contrasena = "5678";
+            usuarioAdmin2.TipoUsuario = "Usuarios Cajas";
             context.Usuarios.Add(usuarioAdmin2);
+
+            var usuarioAdmin3 = new Usuario();
+            usuarioAdmin3.Nombre = "Admin";
+            usuarioAdmin3.Contrasena = "5678";
+            usuarioAdmin3.TipoUsuario = "Usuarios Ventas";
+            context.Usuarios.Add(usuarioAdmin3);
 
             var cat1 = new Categoria();
             cat1.Descripcion = "Carnes y Embutidos";
@@ -56,6 +65,24 @@ namespace BL.Supermercado
             //var Cliente1 = new Cliente();
             //Cliente1.Nombre = "Alex";
             //context.Clientes.Add(Cliente1);
+
+            var archivo = "../../../clientes.csv";
+            using (var reader = new StreamReader(archivo))
+            {
+                reader.ReadLine();
+
+                while (!reader.EndOfStream)
+                {
+                    var linea = reader.ReadLine();
+                    var valores = linea.Split(',');
+
+                    var clienteNuevo = new Cliente();
+                    clienteNuevo.Nombre = valores[0].ToString();
+                    clienteNuevo.Activo = bool.Parse(valores[1].ToString());
+
+                    context.Clientes.Add(clienteNuevo);
+                }
+            }
 
             base.Seed(context);
         }

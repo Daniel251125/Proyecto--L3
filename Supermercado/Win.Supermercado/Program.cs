@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL.Supermercado;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -8,8 +9,9 @@ using System.Windows.Forms;
 
 namespace Win.Supermercado
 {
-    static class Program
+    static class Program 
     {
+        public static Usuario UsuarioLogueado;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -18,7 +20,7 @@ namespace Win.Supermercado
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMenu());
+            Application.Run(new FrmLogin());
         }
 
         public static byte[] imageToByteArray(Image imageIn)

@@ -26,6 +26,31 @@ namespace Win.Supermercado
         {
             var FrmLogin = new FrmLogin();
             FrmLogin.ShowDialog();
+
+            if (Program.UsuarioLogueado != null)
+            {
+                toolStripStatusLabel1.Text = "Usuario: " 
+                    + Program.UsuarioLogueado.Nombre;
+            }
+
+            //if (Program.UsuarioLogueado.TipoUsuario == "Usuarios Cajas")
+            //{
+            //    productosToolStripMenuItem.Visible = false;
+            //    cleintesToolStripMenuItem.Visible = true;
+            //    rentasToolStripMenuItem.Visible = false;
+            //    facturaToolStripMenuItem.Visible = false;
+            //    usuariosToolStripMenuItem.Visible = false;
+            //    reporteDeVentasToolStripMenuItem.Visible = true;
+            //    reporteFacturasToolStripMenuItem.Visible = true;
+            //    reporteProductosToolStripMenuItem.Visible = false;
+            //    //reportedeclientes
+
+            //}
+            //else
+            //{
+            //    Application.Exit();
+            //}
+
         }
 
         private void productosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,8 +81,8 @@ namespace Win.Supermercado
 
         private void reporteDeVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var menu = new FrrmMenu();
-            menu.Show();
+            //var menu = new FrrmMenu();
+            //menu.Show();
 
         }
 
@@ -73,6 +98,13 @@ namespace Win.Supermercado
             var formReporteFacturas = new FormReporteFacturas();
             formReporteFacturas.MdiParent = this;
             formReporteFacturas.Show();
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var usua = new FrmUsuarios();
+            usua.MdiParent = this;
+            usua.Show();
         }
     }
 }

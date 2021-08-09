@@ -32,15 +32,23 @@ namespace Win.Supermercado
             button1.Text = "VERIFICANDO...";
             Application.DoEvents();
 
-            var resultado = _seguridad.Autorizar(usuario, contrasena);
+          
+            var usuarioDB = _seguridad.Autorizar(usuario, contrasena);
 
-            if (resultado == true)
+            if (usuarioDB != null)
             {
-                this.Close();
+                this.Hide();
+                Program.UsuarioLogueado = usuarioDB;
+                FrmWelcome Bienvenido = new FrmWelcome();
+                Bienvenido.ShowDialog();
+                FrrmMenu Menu = new FrrmMenu();
+                Menu.Show();
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrecta");
+                MsjError("Ingrese un usuario y contraseña valido");
+                txtContra.Clear();
+                txtUsuario.Focus();
             }
 
             button1.Enabled = true;
@@ -59,12 +67,71 @@ namespace Win.Supermercado
 
         private void txtUsuario_Enter(object sender, EventArgs e)
         {
-
+            if (txtUsuario.Text == "USUARIO")
+            {
+                txtUsuario.Text = "";
+                txtUsuario.ForeColor = System.Drawing.Color.LightGray;
+            }
         }
 
         private void txtContra_Enter(object sender, EventArgs e)
         {
-            txtContra.UseSystemPasswordChar = true;
+            if (txtContra.Text == "CONTRASEÑA")
+            {
+                txtContra.Text = "";
+                txtContra.ForeColor = System.Drawing.Color.LightGray;
+                txtContra.UseSystemPasswordChar = true;
+            }
+            
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter) 
+                && !string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                txtContra.Focus();
+            }
+        }
+
+        private void txtContra_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txtContra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter)
+               && !string.IsNullOrEmpty(txtContra.Text))
+            {
+                button1.PerformClick();
+            }
+        }
+
+        private void txtUsuario_Leave(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text == "")
+            {
+                txtUsuario.Text = "USUARIO";
+                txtUsuario.ForeColor = System.Drawing.Color.DimGray;
+            }
+        }
+
+        private void txtContra_Leave(object sender, EventArgs e)
+        {
+            if (txtContra.Text == "")
+            {
+                txtContra.Text = "CONTRASEÑA";
+                txtContra.ForeColor = System.Drawing.Color.DimGray;
+                txtContra.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void MsjError(string msg)
+        {
+            lblError.Text = msg;
+            lblError.Visible = true;
+            iconError.Visible = true;
         }
     }
 }
